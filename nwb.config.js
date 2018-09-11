@@ -1,5 +1,5 @@
 module.exports = {
-  type: 'react-component',
+  type: 'react-app',
   npm: {
     esModules: true,
     umd: false

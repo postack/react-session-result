@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import * as V from 'victory'
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
-//import axios from 'axios'
+import axios from 'axios'
 import moment from 'moment'
 
 const BLUE_COLOR = '#00a3de';
@@ -144,14 +144,13 @@ class SessionResult extends Component {
       max,
       basal,
       avatarUrl,
-      nick,
-      id
+      nick
     } = this.getFormattedSession()
     const axisY = [basal - 8, max + 8]
     const ticksEffort = [60,70,80,90]
             
     return (
-      <svg id={id} style={styles.parent} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight}`}
+      <svg style={styles.parent} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight}`}
         key={dateSession}
       >
         <rect x={width-marginWidth/2} y={marginHeight/4} width={marginHeight/2} height={marginHeight/4} fill="#727272"/>

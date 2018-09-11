@@ -1,7 +1,7 @@
 {
   "name": "react-session-result",
   "version": "1.0.0",
-  "description": "react-session-result React component",
+  "description": "react-session-result Session graphic result for an hrm exercise",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -19,7 +19,10 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.22.2",
+    "victory": "^30.3.1"
+  },
   "peerDependencies": {
     "react": "16.x"
   },
