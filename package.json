@@ -1,9 +1,12 @@
 {
   "name": "react-session-result",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "react-session-result Session graphic result for an hrm exercise",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "changelog": [
+    "mostrando mas datos en segundos"
+  ],
   "files": [
     "css",
     "es",
