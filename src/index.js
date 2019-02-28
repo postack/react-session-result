@@ -195,135 +195,132 @@ class SessionResult extends Component {
     const ticksEffort = [60,70,80,90]
     const { id, calories } = this.props;
     return (
-      <div>
-        <svg id={id} style={styles.parent} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight+120}`}
-          key={dateSession}
-        >
-          <rect x={width-marginWidth/2} y={marginHeight/4} width={marginHeight/2} height={marginHeight/4} fill="#727272"/>
-          <rect x={0} y={marginHeight/4} width={marginHeight/2} height={marginHeight/4}  fill="#727272"/>
-          <VictoryLabel x={marginWidth/2} y={25} style={styles.title}
-            text={`${moment(dateSession).format('DD/MM/YYYY HH:mm')}. ${nick} DEP: ${points}`}
-          />
-          <VictoryLabel x={width-marginWidth/2 + 10} y={marginHeight/4 + LEGEND_FONT_SIZE} style={styles.legend}
-            text="EFF%"
-          />
-          <VictoryLabel x={10} y={marginHeight/4 + LEGEND_FONT_SIZE} width={marginHeight/2} style={styles.legend}
-            text="PPM"
-          />
-          
-          {ORANGES.map((o, i) => (
-            <rect 
-              key={i}
-              x={marginWidth/2} 
-              y={marginHeight/2+(height/10)*(i)} 
-              width={width-marginWidth} 
-              height={height/10} 
-              fill={o}/>
-            ))
-          }
-          <VictoryAxis
-            width={width}
-            height={height}
-            offsetY={-marginHeight/2}
-            domain={[0, data.length]}
-            standalone={false}
-            tickValues={getTimeTicks(data)}
-            tickFormat={(t) => `${Math.floor(t/60)}'`}
-            style={styles.axisPrincipal}
-          />
-          
-          <VictoryAxis dependentAxis
-            width={width}
-            //offsetX={marginWidth/2}
-            orientation="left"
-            height={height+marginHeight}
-            domain={axisY}
-            standalone={false}
-            style={styles.axisPrincipal}
-          />
-
-          <VictoryAxis dependentAxis
-            width={width}
-            offsetX={marginWidth/2}
-            orientation="right"
-            height={height+marginHeight}
-            domain={axisY}
-            standalone={false}
-            tickValues={[e60[0].y, e70[0].y, e80[0].y, e90[0].y]}
-            tickFormat={(t, i) => `${ticksEffort[i]}%`}
-            style={styles.axisPrincipal}
-          />
-          
-          
-          <VictoryLine
-            data={data}
-            width={width}
-            height={height+marginHeight}
-            domain={{ x: [0, data.length], y: axisY }}
-            //scale={{x: "time", y: "linear"}}
-            standalone={false}
-            style={styles.dataLine}
-          /> 
-          
-
-
-          <VictoryLine
-            data={e90}
-            width={width}
-            height={height+marginHeight}
-            domain={{ x: [0, data.length], y: axisY }}
-            //scale={{x: "time", y: "linear"}}
-            standalone={false}
-            style={styles.effortLine}
-          /> 
-          <VictoryLine
-            data={e80}
-            width={width}
-            height={height+marginHeight}
-            domain={{ x: [0, data.length], y: axisY }}
-            //scale={{x: "time", y: "linear"}}
-            standalone={false}
-            style={styles.effortLine}
-          />
-          <VictoryLine
-            data={e70}
-            width={width}
-            height={height+marginHeight}
-            domain={{ x: [0, data.length], y: axisY }}
-            //scale={{x: "time", y: "linear"}}
-            standalone={false}
-            style={styles.effortLine}
-          />
-          <VictoryLine
-            data={e60}
-            width={width}
-            height={height+marginHeight}
-            domain={{ x: [0, data.length], y: axisY }}
-            //scale={{x: "time", y: "linear"}}
-            standalone={false}
-            style={styles.effortLine}
-          />
-          <text style={styles.labelData} x="30" y={height + marginHeight + 10} >Tiempo a más de 90% esfuerzo:</text> 
-            <text style={styles.labelValue} x="300" y={height + marginHeight + 10}> {getMinutesFormatted(time90toMore)}min (el {Math.round((time90toMore*10000)/data.length) / 100}% del entrenamiento)</text>
-          
-          <text style={styles.labelData} x="30" y={height + marginHeight + 30} >Tiempo entre 80% y 90% de esfuerzo:</text> 
-            <text style={styles.labelValue} x="300" y={height + marginHeight + 30}> {getMinutesFormatted(time80to90)}min (el {Math.round((time80to90*10000)/data.length) / 100}% del entrenamiento)</text>
-          
-          <text style={styles.labelData} x="30" y={height + marginHeight + 50} >Tiempo entre 70% y 80% de esfuerzo:</text> 
-            <text style={styles.labelValue} x="300" y={height + marginHeight + 50}> {getMinutesFormatted(time70to80)}min (el {Math.round((time70to80*10000)/data.length) / 100}% del entrenamiento)</text>
-          
-          <text style={styles.labelData} x="30" y={height + marginHeight + 70} >Tiempo entre 60% y 70% de esfuerzo:</text> 
-            <text style={styles.labelValue} x="300" y={height + marginHeight + 70}> {getMinutesFormatted(time60to70)}min (el {Math.round((time60to70*10000)/data.length) / 100}% del entrenamiento)</text>
-          
-          <text style={styles.labelData} x="30" y={height + marginHeight + 90} >Tiempo a menos de 60% esfuerzo:</text> 
-            <text style={styles.labelValue} x="300" y={height + marginHeight + 90}> {getMinutesFormatted(timeUnder60)}min (el {Math.round((timeUnder60*10000)/data.length) / 100}% del entrenamiento)</text>
-          
-          <text style={styles.labelData} x="30" y={height + marginHeight + 110} >Calorias:</text> 
-            <text style={styles.labelValue} x="300" y={height + marginHeight + 110}> {calories}</text>
+      <svg id={id} style={styles.parent} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight+120}`}
+        key={dateSession}
+      >
+        <rect x={width-marginWidth/2} y={marginHeight/4} width={marginHeight/2} height={marginHeight/4} fill="#727272"/>
+        <rect x={0} y={marginHeight/4} width={marginHeight/2} height={marginHeight/4}  fill="#727272"/>
+        <VictoryLabel x={marginWidth/2} y={25} style={styles.title}
+          text={`${moment(dateSession).format('DD/MM/YYYY HH:mm')}. ${nick} DEP: ${points}`}
+        />
+        <VictoryLabel x={width-marginWidth/2 + 10} y={marginHeight/4 + LEGEND_FONT_SIZE} style={styles.legend}
+          text="EFF%"
+        />
+        <VictoryLabel x={10} y={marginHeight/4 + LEGEND_FONT_SIZE} width={marginHeight/2} style={styles.legend}
+          text="PPM"
+        />
         
-        </svg>
-          
-      </div>
+        {ORANGES.map((o, i) => (
+          <rect 
+            key={i}
+            x={marginWidth/2} 
+            y={marginHeight/2+(height/10)*(i)} 
+            width={width-marginWidth} 
+            height={height/10} 
+            fill={o}/>
+          ))
+        }
+        <VictoryAxis
+          width={width}
+          height={height}
+          offsetY={-marginHeight/2}
+          domain={[0, data.length]}
+          standalone={false}
+          tickValues={getTimeTicks(data)}
+          tickFormat={(t) => `${Math.floor(t/60)}'`}
+          style={styles.axisPrincipal}
+        />
+        
+        <VictoryAxis dependentAxis
+          width={width}
+          //offsetX={marginWidth/2}
+          orientation="left"
+          height={height+marginHeight}
+          domain={axisY}
+          standalone={false}
+          style={styles.axisPrincipal}
+        />
+
+        <VictoryAxis dependentAxis
+          width={width}
+          offsetX={marginWidth/2}
+          orientation="right"
+          height={height+marginHeight}
+          domain={axisY}
+          standalone={false}
+          tickValues={[e60[0].y, e70[0].y, e80[0].y, e90[0].y]}
+          tickFormat={(t, i) => `${ticksEffort[i]}%`}
+          style={styles.axisPrincipal}
+        />
+        
+        
+        <VictoryLine
+          data={data}
+          width={width}
+          height={height+marginHeight}
+          domain={{ x: [0, data.length], y: axisY }}
+          //scale={{x: "time", y: "linear"}}
+          standalone={false}
+          style={styles.dataLine}
+        /> 
+        
+
+
+        <VictoryLine
+          data={e90}
+          width={width}
+          height={height+marginHeight}
+          domain={{ x: [0, data.length], y: axisY }}
+          //scale={{x: "time", y: "linear"}}
+          standalone={false}
+          style={styles.effortLine}
+        /> 
+        <VictoryLine
+          data={e80}
+          width={width}
+          height={height+marginHeight}
+          domain={{ x: [0, data.length], y: axisY }}
+          //scale={{x: "time", y: "linear"}}
+          standalone={false}
+          style={styles.effortLine}
+        />
+        <VictoryLine
+          data={e70}
+          width={width}
+          height={height+marginHeight}
+          domain={{ x: [0, data.length], y: axisY }}
+          //scale={{x: "time", y: "linear"}}
+          standalone={false}
+          style={styles.effortLine}
+        />
+        <VictoryLine
+          data={e60}
+          width={width}
+          height={height+marginHeight}
+          domain={{ x: [0, data.length], y: axisY }}
+          //scale={{x: "time", y: "linear"}}
+          standalone={false}
+          style={styles.effortLine}
+        />
+        <text style={styles.labelData} x="30" y={height + marginHeight + 10} >Tiempo a más de 90% esfuerzo:</text> 
+          <text style={styles.labelValue} x="300" y={height + marginHeight + 10}> {getMinutesFormatted(time90toMore)}min (el {Math.round((time90toMore*10000)/data.length) / 100}% del entrenamiento)</text>
+        
+        <text style={styles.labelData} x="30" y={height + marginHeight + 30} >Tiempo entre 80% y 90% de esfuerzo:</text> 
+          <text style={styles.labelValue} x="300" y={height + marginHeight + 30}> {getMinutesFormatted(time80to90)}min (el {Math.round((time80to90*10000)/data.length) / 100}% del entrenamiento)</text>
+        
+        <text style={styles.labelData} x="30" y={height + marginHeight + 50} >Tiempo entre 70% y 80% de esfuerzo:</text> 
+          <text style={styles.labelValue} x="300" y={height + marginHeight + 50}> {getMinutesFormatted(time70to80)}min (el {Math.round((time70to80*10000)/data.length) / 100}% del entrenamiento)</text>
+        
+        <text style={styles.labelData} x="30" y={height + marginHeight + 70} >Tiempo entre 60% y 70% de esfuerzo:</text> 
+          <text style={styles.labelValue} x="300" y={height + marginHeight + 70}> {getMinutesFormatted(time60to70)}min (el {Math.round((time60to70*10000)/data.length) / 100}% del entrenamiento)</text>
+        
+        <text style={styles.labelData} x="30" y={height + marginHeight + 90} >Tiempo a menos de 60% esfuerzo:</text> 
+          <text style={styles.labelValue} x="300" y={height + marginHeight + 90}> {getMinutesFormatted(timeUnder60)}min (el {Math.round((timeUnder60*10000)/data.length) / 100}% del entrenamiento)</text>
+        
+        <text style={styles.labelData} x="30" y={height + marginHeight + 110} >Calorias:</text> 
+          <text style={styles.labelValue} x="300" y={height + marginHeight + 110}> {calories}</text>
+      
+      </svg>
     )
   }
 }
