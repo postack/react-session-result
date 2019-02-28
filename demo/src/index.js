@@ -17,6 +17,7 @@ class Demo extends Component {
         minHeartbeat={session.datosDoma.basalPulsaciones}
         nick={cliente.nick}
         avatarUrl={cliente.avatarUrl}
+        calories={session.currentCalorias}
       />
     </div>
   }

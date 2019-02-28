@@ -60,6 +60,14 @@ const styles = {
       fontWeight: 'bold'
     }
 
+  },
+  labelData: {
+    fontWeight: 'bold',
+    color: '#000',
+    fontSize: 12,
+  },
+  labelValue: {
+    fontSize: 12
   }
 }
 
@@ -74,6 +82,12 @@ const getTimeTicks = function(data) {
     ticks.push(i*size)
   }
   return ticks;
+}
+
+const getMinutesFormatted = function(segs) {
+  const mins = Math.floor(segs / 60);
+  const seg = Math.ceil((segs % 60) / 10)
+  return seg ? `${mins}.${seg}` : mins;
 }
 
 class SessionResult extends Component {
@@ -179,10 +193,10 @@ class SessionResult extends Component {
     } = this.getFormattedSession()
     const axisY = [basal - 8, max + 8]
     const ticksEffort = [60,70,80,90]
-    const { id } = this.props;
+    const { id, calories } = this.props;
     return (
       <div>
-        <svg id={id} style={styles.parent} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight}`}
+        <svg id={id} style={styles.parent} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight+120}`}
           key={dateSession}
         >
           <rect x={width-marginWidth/2} y={marginHeight/4} width={marginHeight/2} height={marginHeight/4} fill="#727272"/>
@@ -289,14 +303,26 @@ class SessionResult extends Component {
             standalone={false}
             style={styles.effortLine}
           />
+          <text style={styles.labelData} x="30" y={height + marginHeight + 10} >Tiempo a más de 90% esfuerzo:</text> 
+            <text style={styles.labelValue} x="300" y={height + marginHeight + 10}> {getMinutesFormatted(time90toMore)}min (el {Math.round((time90toMore*10000)/data.length) / 100}% del entrenamiento)</text>
+          
+          <text style={styles.labelData} x="30" y={height + marginHeight + 30} >Tiempo entre 80% y 90% de esfuerzo:</text> 
+            <text style={styles.labelValue} x="300" y={height + marginHeight + 30}> {getMinutesFormatted(time80to90)}min (el {Math.round((time80to90*10000)/data.length) / 100}% del entrenamiento)</text>
+          
+          <text style={styles.labelData} x="30" y={height + marginHeight + 50} >Tiempo entre 70% y 80% de esfuerzo:</text> 
+            <text style={styles.labelValue} x="300" y={height + marginHeight + 50}> {getMinutesFormatted(time70to80)}min (el {Math.round((time70to80*10000)/data.length) / 100}% del entrenamiento)</text>
+          
+          <text style={styles.labelData} x="30" y={height + marginHeight + 70} >Tiempo entre 60% y 70% de esfuerzo:</text> 
+            <text style={styles.labelValue} x="300" y={height + marginHeight + 70}> {getMinutesFormatted(time60to70)}min (el {Math.round((time60to70*10000)/data.length) / 100}% del entrenamiento)</text>
+          
+          <text style={styles.labelData} x="30" y={height + marginHeight + 90} >Tiempo a menos de 60% esfuerzo:</text> 
+            <text style={styles.labelValue} x="300" y={height + marginHeight + 90}> {getMinutesFormatted(timeUnder60)}min (el {Math.round((timeUnder60*10000)/data.length) / 100}% del entrenamiento)</text>
+          
+          <text style={styles.labelData} x="30" y={height + marginHeight + 110} >Calorias:</text> 
+            <text style={styles.labelValue} x="300" y={height + marginHeight + 110}> {calories}</text>
+        
         </svg>
-        <div>
-          <p> <b>Segundos trabajados a más de 90% esfuerzo:</b> {time90toMore} (el {Math.round((time90toMore*10000)/data.length) / 100}% del entrenamiento)</p> 
-          <p> <b>Segundos trabajados entre 80% y 90% de esfuerzo:</b> {time80to90} (el {Math.round((time80to90*10000)/data.length) / 100}% del entrenamiento)</p> 
-          <p> <b>Segundos trabajados entre 70% y 80% de esfuerzo:</b> {time70to80} (el {Math.round((time70to80*10000)/data.length) / 100}% del entrenamiento)</p> 
-          <p> <b>Segundos trabajados entre 60% y 70% de esfuerzo:</b> {time60to70} (el {Math.round((time60to70*10000)/data.length) / 100}% del entrenamiento)</p> 
-          <p> <b>Segundos trabajados a menos de 60% esfuerzo:</b> {timeUnder60} (el {Math.round((timeUnder60*10000)/data.length) / 100}% del entrenamiento)</p> 
-        </div>
+          
       </div>
     )
   }
