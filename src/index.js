@@ -63,11 +63,12 @@ const styles = {
   },
   labelData: {
     fontWeight: 'bold',
-    color: '#000',
+    fill: '#727272',
     fontSize: 12,
   },
   labelValue: {
-    fontSize: 12
+    fontSize: 12,
+    fill: '#727272'
   }
 }
 
@@ -195,7 +196,7 @@ class SessionResult extends Component {
     const ticksEffort = [60,70,80,90]
     const { id, calories } = this.props;
     return (
-      <svg id={id} style={styles.parent} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight+120}`}
+      <svg id={id} style={styles.parent} width={width+marginWidth} height={height+marginHeight+120} viewBox={`0 0 ${width+marginWidth} ${height+marginHeight+120}`}
         key={dateSession}
       >
         <rect x={width-marginWidth/2} y={marginHeight/4} width={marginHeight/2} height={marginHeight/4} fill="#727272"/>
